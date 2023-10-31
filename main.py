@@ -10,7 +10,7 @@ bot = telebot.TeleBot(telegram_token)
 
 def text_recognize(file_path):
     reader = easyocr.Reader(["ru"])
-    result = reader.readtext(file_path, detail=0, allowlist='1,2,3,4,5,6,7,8,9,0')
+    result = reader.readtext(file_path, detail=0, allowlist='1,2,3,4,5,6,7,8,9,0,А,Б,В,Г,Е,З,И,К,Л,М,Н,О,П,С,Т,Х,Ч,Ь,Э,Я,а,б,в,г,е,з,и,к,л,м,н,о,п,с,т,х,ч,ь,э,я')
 
     if len(result) >= 5:
         combined_result = ''.join(result[:5])
@@ -29,8 +29,9 @@ def text_recognize(file_path):
 def hello(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False)
     with open('photo5.jpg', 'rb') as photo:
-        bot.send_photo(message.chat.id, photo,caption=f'Привет {message.from_user.first_name}! Пожалуйста, предоставьте четкое изображение банкноты номиналом 5000 рублей или 1000 рублей, расположенной горизонтально. Изображение должно быть высокого качества для корректной обработки. Фото должно выглядеть примерно так: ', reply_markup=markup)
-
+        bot.send_photo(message.chat.id, photo,
+                       caption=f'Привет {message.from_user.first_name}! Пожалуйста, предоставьте четкое изображение банкноты номиналом  расположенной горизонтаьно. Изображение должно быть высокого качества для корректной обработки. Фото должно выглядеть примерно так: ',
+                       reply_markup=markup)
 # Обработчик для получения фото
 @bot.message_handler(content_types=['photo'])
 def handle_photo(message):

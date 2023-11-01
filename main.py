@@ -13,13 +13,13 @@ def text_recognize(file_path):
     result = reader.readtext(file_path, detail=0, allowlist='1,2,3,4,5,6,7,8,9,0,А,Б,В,Г,Е,З,И,К,Л,М,Н,О,П,С,Т,Х,Ч,Ь,Э,Я,а,б,в,г,е,з,и,к,л,м,н,о,п,с,т,х,ч,ь,э,я')
 
     if len(result) >= 5:
-        combined_result = ''.join(result[:5])
+        combined_result = ''.join(result[:4])
         if result[1] != result[2]:
             # Проверяем на наличие последовательности из трех нулей
             index = combined_result.find('000')
             if index != -1:
                 # Удаляем все символы до последовательности из трех нулей включительно
-                combined_result = combined_result[index + 20:]
+                combined_result = combined_result[index + 20    :]
             return combined_result
     return None
 
@@ -30,7 +30,7 @@ def hello(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False)
     with open('photo5.jpg', 'rb') as photo:
         bot.send_photo(message.chat.id, photo,
-                       caption=f'Привет {message.from_user.first_name}! Пожалуйста, предоставьте четкое изображение банкноты номиналом  расположенной горизонтаьно. Изображение должно быть высокого качества для корректной обработки. Фото должно выглядеть примерно так: ',
+                       caption=f'Привет {message.from_user.first_name}! Пожалуйста, предоставьте четкое изображение банкноты номиналом  расположенной горизонталюьно. Изображение должно быть высокого качества для корректной обработки. Фото должно выглядеть примерно так: ',
                        reply_markup=markup)
 # Обработчик для получения фото
 @bot.message_handler(content_types=['photo'])
